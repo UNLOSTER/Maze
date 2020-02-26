@@ -284,12 +284,12 @@ int CAdventrue::search(int x, int y)
 	for (int i = 0; i < 4; i++)								// 随机化
 	{
 		e[i] = rand() % 4;
-		for (int j = 0; j <= i; j++)
+		for (int j = 0; j < i; j++)
 		{
-			if (e[i] == e[j] && i != j)
+			if (e[i] == e[j])
 			{
 				e[i] = rand() % 4;
-				j = 0;
+				j = -1;
 			}
 		}
 	}
@@ -324,12 +324,12 @@ int CAdventrue::dfs(int step)
 	for (int i = 0; i < 4; i++)
 	{
 		e[i] = rand() % 4 + 1;
-		for (int j = 0; j <= i; j++)
+		for (int j = 0; j < i; j++)
 		{
-			if (e[i] == e[j] && i != j)
+			if (e[i] == e[j])
 			{
 				e[i] = rand() % 4 + 1;
-				j = 0;
+				j = -1;
 			}
 		}
 	}
@@ -347,6 +347,7 @@ int CAdventrue::dfs(int step)
 	{
 		if ((reg[step][cst[i]] == 1 || reg[cst[i]][step] == 1) && !tip[cst[i]]) // 打通（走过）判断
 		{
+
 			reg[step][cst[i]] = 2;												// 标记打通
 			reg[cst[i]][step] = 2;												// 标记打通
 			tip[cst[i]] = 1;													// 标记走过

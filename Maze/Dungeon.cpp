@@ -14,7 +14,7 @@ extern MOUSEMSG m_msg;	// 鼠标消息
 void CDungeon::game()
 {
 	COther* but = new COther();
-
+	
 	while (1)
 	{
 		clear();									// 清空数据
@@ -134,7 +134,7 @@ void CDungeon::deepFS()
 	}
 
 	dfs(tot);				// 进行图论 DFS 生成
-
+	
 	for (int i = 1; i <= tot; i++)
 	{
 		for (int j = 1; j <= tot; j++)
