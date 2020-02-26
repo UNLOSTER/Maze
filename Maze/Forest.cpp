@@ -132,13 +132,16 @@ void CForest::prim()
 			feg[i][j] = INF;
 		}
 	}
-	for (int i = 1; i <= tot; i++) {
+	for (int i = 1; i <= tot; i++)
+	{
 		tip[i] = 0;
-		if (i % ((n - 1) / 2) != 0) {
+		if (i % ((n - 1) / 2) != 0)
+		{
 			feg[i][i + 1] = 1;
 			feg[i + 1][i] = 1;
 		}
-		if (i <= tot - (n - 1) / 2) {
+		if (i <= tot - (n - 1) / 2)
+		{
 			feg[i][i + (n - 1) / 2] = 1;
 			feg[i + (n - 1) / 2][i] = 1;
 		}
@@ -158,12 +161,15 @@ void CForest::prim()
 	for (int i = 1; i <= tot - 1; i++)	// Prim Ëã·¨ºËÐÄ
 	{
 		std::random_shuffle(ar.begin(), ar.end());
-del:
-		Arr ans = ar.back();
-		if (tip[ans.head] && tip[ans.tail])
-		{
-			ar.pop_back();
-			goto del;
+		Arr ans;
+		while (1) {
+			ans = ar.back();
+			if (tip[ans.head] && tip[ans.tail])
+			{
+				ar.pop_back();
+			} else {
+				break;
+			}
 		}
 		ar.pop_back();
 		tip[ans.head] = 1;
