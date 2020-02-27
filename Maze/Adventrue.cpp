@@ -28,8 +28,6 @@ void CAdventrue::game()
 			ch = _getch();	// 键盘消息获取
 			if (ch == 27)	// 按 Esc 退出
 			{
-				delete but;
-				but = NULL;
 				break;
 			}
 		}
@@ -109,6 +107,8 @@ void CAdventrue::game()
 
 	delete but;
 	but = NULL;
+	delete Adv;
+	Adv = NULL;
 }
 
 // 通过一关卡界面
@@ -141,10 +141,7 @@ bool CAdventrue::winPut()
 		outtextxy(140 + 3, 90 + 3, title);		// 标题输出
 
 		if (but->button(273, 215, L" 下一关"))	// 下一关按钮
-		{
-			times = 0;
-			return 0;
-		}
+			break;
 
 		if (but->button(273, 300, L"回到主页"))	// 回到主页按钮
 		{
@@ -162,8 +159,10 @@ bool CAdventrue::winPut()
 		FlushBatchDraw();
 	}
 
+	times = 0;
 	delete but;
 	but = NULL;
+	return 0;
 }
 
 // 通过全关卡界面
@@ -192,11 +191,7 @@ void CAdventrue::gameOver()
 		outtextxy(200 + 3, 90 + 3, L"游戏结束");	// 标题输出
 
 		if (but->button(273, 215, L"回到主页"))		// 回到主页按钮
-		{
-			delete but;
-			but = NULL;
-			return;
-		}
+			break;
 
 		if (but->button(273, 300, L"退出游戏"))		// 退出游戏按钮
 		{
@@ -268,7 +263,7 @@ void CAdventrue::clear()
 	}
 	for (int i = 1; i <= (n + 1) / 2 * (m + 1) / 2; i++)
 	{
-		for (int j = 1; j <= 3; j++)
+		for (int j = 0; j < 3; j++)
 			flag[j][i] = 0;
 		tip[i] = 0;
 	}
