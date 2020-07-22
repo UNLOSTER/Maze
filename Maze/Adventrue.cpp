@@ -4,9 +4,9 @@
 
 // 全局变量
 
-char ch;			// 键盘消息
-double times = 0;	// 计时器
-MOUSEMSG m_msg;		// 鼠标消息
+char ch;						// 键盘消息
+long long times, start_time;	// 计时器
+MOUSEMSG m_msg;				// 鼠标消息
 
 // CAdventure 类函数实现
 
@@ -101,6 +101,7 @@ void CAdventrue::game()
 		outtextxy(249, 440, L"按 Esc 退出游戏");	// 输出其他
 
 		FlushBatchDraw();
+		Sleep(5);
 	}
 
 	EndBatchDraw();
@@ -118,7 +119,7 @@ bool CAdventrue::winPut()
 
 	wchar_t title[50];
 
-	swprintf_s(title, L"使用时间 %d s\0", int(times));
+	swprintf_s(title, L"使用时间 %lld s\0", times);
 
 	while (1)
 	{
@@ -157,6 +158,7 @@ bool CAdventrue::winPut()
 		}
 
 		FlushBatchDraw();
+		Sleep(5);
 	}
 
 	times = 0;
@@ -203,6 +205,7 @@ void CAdventrue::gameOver()
 		}
 
 		FlushBatchDraw();
+		Sleep(5);
 	}
 
 	delete but;

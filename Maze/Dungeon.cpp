@@ -4,9 +4,9 @@
 
 // 全局变量
 
-extern char ch;			// 键盘消息
-extern double times;	// 计时器
-extern MOUSEMSG m_msg;	// 鼠标消息
+extern char ch;						// 键盘消息
+extern long long times, start_time;	// 计时器
+extern MOUSEMSG m_msg;				// 鼠标消息
 
 // CDungeon 函数实现
 
@@ -24,9 +24,11 @@ void CDungeon::game()
 		x = 2;
 		y = 2;										// 重置坐标
 
+		start_time = int(time(NULL));				// 设置初始时间 0 
+
 		while (1)
 		{
-			times += 0.00093;						// 累加时间
+			times = int(time(NULL)) - start_time;	// 累加时间
 
 			ch = '#';								// 键盘消息清空
 
@@ -50,8 +52,7 @@ void CDungeon::game()
 
 			if (but->button(513, 400, L"回到主页"))											// 回到主页按钮
 			{
-				int t = int(times);
-				double t0 = times;
+				long long t = times;
 				wchar_t* text[10];
 				text[0] = L"你是否要回到主页？\n";
 				but->button(513, 400, L"回到主页");
@@ -62,21 +63,23 @@ void CDungeon::game()
 					but = NULL;
 					return;
 				}
-				times = t0;
+				start_time = int(time(NULL)) - t;
+				times = t;
 			}
 
 			if (but->button(513, 350, L"　暂停　"))							// 暂停按钮
 			{
-				int t = int(times);
-				double t0 = times;
+				long long t = times;
 				wchar_t* text[10];
 				text[0] = L"按“确定”解除暂停\n";
 				but->button(513, 350, L"　暂停　");
 				but->putMessageBox(170, 165, 300, 150, L"暂停", text, 1);	// 暂停对话框
-				times = t0;
+				start_time = int(time(NULL)) - t;
+				times = t;
 			}
 
 			FlushBatchDraw();
+			Sleep(5);
 		}
 
 		if (winPut())				// 通过一关卡界面
@@ -161,7 +164,7 @@ void CDungeon::putRoom()
 
 	swprintf_s(pas1, L"第 %d 关\0", pass);
 	swprintf_s(pas2, L"共 %d 关\0", all_pass);
-	swprintf_s(tim, L"使用时间 %d s\0", int(times));
+	swprintf_s(tim, L"使用时间 %lld s\0", times);
 	LOGFONT f;
 	gettextstyle(&f);
 	f.lfHeight = 20;

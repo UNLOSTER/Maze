@@ -12,7 +12,7 @@ class COther
 public:
 	COther() {}
 	~COther() {}
-
+	
 	void putAll();																											// 绘制背景
 	bool button(int a, int b, wchar_t str[]);																				// 放置按钮
 	int putMessageBox(int x, int y, int wight, int hight, wchar_t title[], wchar_t * text[], int g_num, int var = MY_OK);	// 输出对话框

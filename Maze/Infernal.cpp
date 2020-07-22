@@ -4,9 +4,9 @@
 
 // 全局变量
 
-extern char ch;			// 键盘消息
-extern double times;	// 计时器
-extern MOUSEMSG m_msg;	// 鼠标消息
+extern char ch;						// 键盘消息
+extern long long times, start_time;	// 计时器
+extern MOUSEMSG m_msg;				// 鼠标消息
 
 // CInfernal 函数实现
 
@@ -17,41 +17,42 @@ void CInfernal::game()
 
 	while (1)
 	{
-		clear();								// 清空数据
+		clear();									// 清空数据
 
-		myKLS();								// 生成迷宫
-
+		myKLS();									// 生成迷宫
+		
 		x = 2;
-		y = 2;									// 重置坐标
+		y = 2;										// 重置坐标
 
+		start_time = int(time(NULL));				// 设置初始时间 0 
+		
 		while (1)
 		{
-			times += 0.00093;					// 累加时间
+			times = int(time(NULL)) - start_time;	// 累加时间
 
-			ch = '#';							// 键盘消息清空
+			ch = '#';								// 键盘消息清空
 
-			if (_kbhit())						// 键盘消息获取
+			if (_kbhit())							// 键盘消息获取
 				ch = _getch();
 
-			if (MouseHit())						// 鼠标消息获取
+			if (MouseHit())							// 鼠标消息获取
 				m_msg = GetMouseMsg();
 
-			man_Move();							// 人物移动处理
+			man_Move();								// 人物移动处理
 
-			if (x == to_x && y == to_y)			// 到达终点判断
+			if (x == to_x && y == to_y)				// 到达终点判断
 				break;
 
-			but->putAll();						// 绘制背景
+			but->putAll();							// 绘制背景
 
 			setfillcolor(RGB(50, 0, 0));
-			solidrectangle(16, 17, 465, 465);	// 绘制游戏区
+			solidrectangle(16, 17, 465, 465);		// 绘制游戏区
 
-			putRoom();							// 绘制界面
+			putRoom();								// 绘制界面
 
 			if (but->button(513, 400, L"回到主页"))											// 回到主页按钮
 			{
-				int t = int(times);
-				double t0 = times;
+				long long t = times;
 				wchar_t* text[10];
 				text[0] = L"你是否要回到主页？\n";
 				but->button(513, 400, L"回到主页");
@@ -62,21 +63,23 @@ void CInfernal::game()
 					but = NULL;
 					return;
 				}
-				times = t0;
+				start_time = int(time(NULL)) - t;
+				times = t;
 			}
 
 			if (but->button(513, 350, L"　暂停　"))							// 暂停按钮
 			{
-				int t = int(times);
-				double t0 = times;
+				long long t = times;
 				wchar_t* text[10];
 				text[0] = L"按“确定”解除暂停\n";
 				but->button(513, 350, L"　暂停　");
 				but->putMessageBox(170, 165, 300, 150, L"暂停", text, 1);	// 暂停对话框
-				times = t0;
+				start_time = int(time(NULL)) - t;
+				times = t;
 			}
 
 			FlushBatchDraw();
+			Sleep(5);
 		}
 
 		if (winPut())		// 通过一关卡界面
@@ -129,7 +132,7 @@ void CInfernal::putRoom()
 
 	swprintf_s(pas1, L"第 %d 关\0", pass);
 	swprintf_s(pas2, L"共 %d 关\0", all_pass);
-	swprintf_s(tim, L"使用时间 %d s\0", int(times));
+	swprintf_s(tim, L"使用时间 %lld s\0", times);
 	LOGFONT f;
 	gettextstyle(&f);
 	f.lfHeight = 20;
