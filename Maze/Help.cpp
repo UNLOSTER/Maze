@@ -16,7 +16,7 @@ void CHelp::put()
 	while (1)
 	{
 
-		if (MouseHit())								// 鼠标消息获取
+		while (MouseHit())							// 鼠标消息获取
 			m_msg = GetMouseMsg();
 
 		but->putAll();								// 绘制背景

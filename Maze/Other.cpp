@@ -62,7 +62,7 @@ int COther::putMessageBox(int x, int y, int wight, int hight, wchar_t title[], w
 		if (_kbhit())								// 键盘消息清空
 			ch = _getch();
 
-		if (MouseHit())
+		while (MouseHit())
 			m_msg = GetMouseMsg();					// 鼠标消息获取
 
 		setfillcolor(RGB(25, 25, 25));

@@ -35,7 +35,7 @@ void CInfernal::game()
 			if (_kbhit())							// 键盘消息获取
 				ch = _getch();
 
-			if (MouseHit())							// 鼠标消息获取
+			while (MouseHit())						// 鼠标消息获取
 				m_msg = GetMouseMsg();
 
 			man_Move();								// 人物移动处理

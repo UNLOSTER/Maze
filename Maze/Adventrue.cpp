@@ -32,7 +32,7 @@ void CAdventrue::game()
 			}
 		}
 
-		if (MouseHit())		// 鼠标消息获取
+		while (MouseHit())	// 鼠标消息获取
 			m_msg = GetMouseMsg();
 
 		but->putAll();		// 绘制背景
@@ -126,7 +126,7 @@ bool CAdventrue::winPut()
 		if (_kbhit())				// 键盘消息获取
 			ch = _getch();
 
-		if (MouseHit())
+		while (MouseHit())
 			m_msg = GetMouseMsg();	// 鼠标消息获取
 
 		but->putAll();				// 绘制背景
@@ -177,7 +177,7 @@ void CAdventrue::gameOver()
 		if (_kbhit())				// 键盘消息获取
 			ch = _getch();
 
-		if (MouseHit())				// 鼠标消息获取
+		while (MouseHit())			// 鼠标消息获取
 			m_msg = GetMouseMsg();	
 
 		but->putAll();				// 绘制背景
