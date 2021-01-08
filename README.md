@@ -44,5 +44,5 @@ Help.cpp :        帮助信息类实现文件
 Other.cpp :       刷新界面、放置按钮、输出对话框类实现文件
 ~~~
 ### 运行效果：
-![start](https://f.myid.email/87/b9/bc/dddf9c-08f8-9660-72f26953eac1/Files/maze-start.png)
-![play](https://f.myid.email/87/b9/bc/dddf9c-08f8-9660-72f26953eac1/Files/maze-game.png)
+![start]( https://f.myid.email/87/b9/bc/dddf9c-08f8-9660-72f26953eac1/Files/maze-start.png )
+![play]( https://f.myid.email/87/b9/bc/dddf9c-08f8-9660-72f26953eac1/Files/maze-game.png )
